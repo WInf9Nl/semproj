@@ -1,27 +1,67 @@
 import numpy as np
-import matplotlib as mp
+import math
+import matplotlib.pyplot as plt
 
-
-class Dynamics:                                 #dynamics are populations with different ways for growth
+class Dynamics:
 
     def __init__(self, growthfactor, startvalue):
      self.gf = growthfactor
      self.sv = startvalue
+     self.ordinates = []
+     self.abscissa = []
 
-    def exp(self, timeintervall, steps, disorcont):
-        if disorcont == True:
-            self.exptime = self.gf*timeintervall        #percentage of growth
-            return self.sv*self.exptime               #population after timeintervall
+    def lin(self, time, steps, discrete):
+        if discrete == True:
+            return self.gf*time + self.sv
         else:
-            momentvalue = self.sv
-            for i in range(0, timeintervall, steps):
-                if momentvalue > 1:
+            x = 0
+            while x < time:
+                momentvalue = self.gf*x + self.sv
+                if momentvalue < 1:
                     break
-                momentvalue = (self.sv*self.gf**i) // 1
-            self.populationvalues.append(self.momentvalue)
+                else:
+                    self.ordinates.append(momentvalue)
+                    self.abscissa.append(x)
+                    x += steps
+            fig = plt.figure()
+            ax = plt.subplot('211')
+            ax.plot(self.abscissa, self.ordinates)
+            fig.savefig('plot.png', frameon=None)
 
-    def log(self, timeintervall, capacity):
-        self.
-bacteria = Dynamics(1.4, 200)
 
-print(bacteria.exp(5))
+    def exp(self, time, steps, discrete):
+        if discrete == True:
+            return self.sv*math.exp(self.gf*time)
+        else:
+            x = 0
+            while x < time:
+                momentvalue = self.sv*math.exp(self.gf*x)
+                if momentvalue < 1:
+                    break
+                else:
+                    self.ordinates.append(momentvalue)
+                    self.abscissa.append(x)
+                    x += steps
+            fig = plt.figure()
+            ax = plt.subplot('211')
+            ax.plot(self.abscissa, self.ordinates)
+            print(self.ordinates)
+            fig.savefig('plot.png')
+
+    def log(self, time, steps, discrete, capacity):
+        if discrete == True:
+            return (capacity*self.sv*math.exp(self.gf*time))/(capacity + self.sv*(math.exp(self.gf*time)-1))
+        else:
+            x = 0
+            while x < time:
+                momentvalue = (capacity*self.sv*math.exp(self.gf*x))/(capacity + self.sv*(math.exp(self.gf*x)-1))
+                if momentvalue < 1:
+                    break
+                else:
+                    self.ordinates.append(momentvalue)
+                    self.abscissa.append(x)
+                    x += steps
+            fig = plt.figure()
+            ax = plt.subplot('211')
+            ax.plot(self.abscissa, self.ordinates)
+            fig.savefig('plot.png', frameon=None)
