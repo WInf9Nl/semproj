@@ -12,7 +12,7 @@ class Dynamics:
 
     def lin(self, time, steps, discrete):
         if discrete == True:
-            return self.gf*time + self.sv
+            return self.gf*(time/steps) + self.sv
         else:
             x = 0
             while x < time:
@@ -31,7 +31,7 @@ class Dynamics:
 
     def exp(self, time, steps, discrete):
         if discrete == True:
-            return self.sv*math.exp(self.gf*time)
+            return self.sv*math.exp(self.gf*(time/steps))
         else:
             x = 0
             while x < time:
@@ -50,7 +50,7 @@ class Dynamics:
 
     def log(self, time, steps, discrete, capacity):
         if discrete == True:
-            return (capacity*self.sv*math.exp(self.gf*time))/(capacity + self.sv*(math.exp(self.gf*time)-1))
+            return (capacity*self.sv*math.exp(self.gf*(time/steps))/(capacity + self.sv*(math.exp(self.gf*(time/steps))-1)))
         else:
             x = 0
             while x < time:
@@ -65,4 +65,3 @@ class Dynamics:
             ax = plt.subplot('211')
             ax.plot(self.abscissa, self.ordinates)
             fig.savefig('plot.png', frameon=None)
-	def lotvol(self, time, steps, discrete)
