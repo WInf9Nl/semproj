@@ -44,7 +44,17 @@ def calculate(btn):
                 population = Dynamics(growthfactor, startvalue)
                 population.log(time, steps, False, capacity)
                 app.reloadImage('plot', './plot.png')
-    except:
+		elif dynamictype == 'Lotka/Volterra':
+				app.startPagedWindow('Lotka/Volterra')
+				app.startPage()
+				app.addEntry('growthofprey')
+				app.setEntryDefault('growthofprey', 'GrowthrateofPrey')
+				app.addEntry('startvprey')
+				app.setEntryDefault('startvprey', 'PopulationsizeofPrey')
+				app.addEntry('growthofpredator')
+				app.setEntryDefault('growthofpredator', 'GrowthrateofPredator')
+				app.addEntry 
+	except:
         app.setMessage('Solution', 'Sorry an error occured')
 
 app = gui('PoDyCa', '600x600')

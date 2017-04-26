@@ -65,3 +65,4 @@ class Dynamics:
             ax = plt.subplot('211')
             ax.plot(self.abscissa, self.ordinates)
             fig.savefig('plot.png', frameon=None)
+	def lotvol(self, time, steps, discrete)
