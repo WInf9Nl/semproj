@@ -70,7 +70,7 @@ class Dynamics:
                 predatorlabel = mpl.patches.Patch(color='red', label='Predator')
                 ax.legend(handles=[predatorlabel])
                 preylabel = mpl.patches.Patch(color='blue', label='Prey')
-                ax.legen(handles=[preylabel])
+                ax.legend(handles=[preylabel])
                 ax.plot(t, prey, 'b')
                 ax.plot(t, predator, 'r', label='predator')
                 ax.grid()
